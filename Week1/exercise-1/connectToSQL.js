@@ -18,6 +18,7 @@ con.connect(function (err) {
         if (err) throw err;
         console.log("Database created");
         afterDbCreation();
+        con.end();
     })
 
 });
@@ -38,15 +39,15 @@ function afterDbCreation() {
         if (err) throw err;
         console.log("Connected!");
 
-        con.query("CREATE TABLE IF NOT EXISTS Invitee  (invitee_no INT, invitee_name LONGTEXT, invited_by LONGTEXT)", function (err, result) {
+        con.query("CREATE TABLE IF NOT EXISTS Invitee  (invitee_no INT, invitee_name CHAR, invited_by CHAR)", function (err, result) {
             if (err) throw err;
             console.log("Table created");
         })
-        con.query("CREATE TABLE IF NOT EXISTS Room  (room_no INT, room_name LONGTEXT, floor_number INT)", function (err, result) {
+        con.query("CREATE TABLE IF NOT EXISTS Room  (room_no INT, room_name CHAR, floor_number INT)", function (err, result) {
             if (err) throw err;
             console.log("Table created");
         })
-        con.query("CREATE TABLE IF NOT EXISTS Meeting  (meeting_no INT, meeting_title LONGTEXT, starting_time TIME, ending_time TIME, room_no INT)", function (err, result) {
+        con.query("CREATE TABLE IF NOT EXISTS Meeting  (meeting_no INT, meeting_title CHAR, starting_time TIME, ending_time TIME, room_no INT)", function (err, result) {
             if (err) throw err;
             console.log("Table created");
         })
@@ -64,11 +65,14 @@ function afterDbCreation() {
                 console.log("Record inserted");
             });
 
-            con.query("INSERT INTO Meeting VALUES (5, 'meeting title', '14:30','15:30' )", function (err, result) {
+            con.query("INSERT INTO Meeting VALUES (5, 'meeting title', '14:30','15:30', 12 )", function (err, result) {
                 if (err) throw err;
                 console.log("Record inserted");
             });
+
+
         }
     });
 
 }
+
