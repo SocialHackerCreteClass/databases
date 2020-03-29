@@ -14,6 +14,12 @@ var con = mysql.createConnection({
 con.connect(function (err) {
     if (err) throw err;
     console.log("Database Connected!");
+
+    con.query("DROP DATABASE IF EXISTS meetup", function (err, result) {
+        if (err) throw err;
+        console.log("Previous Database Dropped");
+
+    })
     con.query("CREATE DATABASE IF NOT EXISTS meetup", function (err, result) {
         if (err) throw err;
         console.log("Database created");
