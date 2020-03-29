@@ -20,6 +20,10 @@ con.connect(function (err) {
         afterDbCreation();
         con.end();
     })
+    con.query("SET @@global.sql_mode= '';", function (err, result) {
+        if (err) throw err;
+        console.log("Query about strict mode updated!");
+    })
 
 });
 
@@ -51,6 +55,7 @@ function afterDbCreation() {
             if (err) throw err;
             console.log("Table created");
         })
+
 
 
         //query to insert data into tables-----------------------------------------------------------------------------------------------------
