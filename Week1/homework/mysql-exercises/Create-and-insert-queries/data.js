@@ -1,5 +1,10 @@
 'use strict';
 
+const DateGenerator = require('random-date-generator');
+// Need to check that starting date precedes ending date
+const startDate = new Date(2015, 1, 1);
+const endDate = new Date(2020, 1, 1);
+
 const firstName = [
   'Judith',
   'Aphrodite',
@@ -101,23 +106,9 @@ const generateRandomSalary = () => {
   return Math.floor(Math.random() * maxSalary) + minSalary;
 };
 
-const generateRandomDate = (date1 = '01/01/2018', date2 = '01/01/2020') => {
-  function randomValueBetween(min, max) {
-    return Math.random() * (max - min) + min;
-  }
-  var date1 = date1 || '01-01-1970';
-  var date2 = date2 || new Date().toLocaleDateString();
-  date1 = new Date(date1).getTime();
-  date2 = new Date(date2).getTime();
-  if (date1 > date2) {
-    return new Date(randomValueBetween(date2, date1)).toLocaleDateString();
-  }
-  return new Date(randomValueBetween(date1, date2)).toLocaleDateString();
-};
-
 const generateEmployeeArray = (numOfEntries) => {
   let employeeArray = [];
-  for (let i = 0; i < numOfEntries; i++) {
+  for (let i = 0; i < numOfEntries; i += 1) {
     let arr = [
       generateRandomID(),
       generateName(),
@@ -131,7 +122,7 @@ const generateEmployeeArray = (numOfEntries) => {
 
 const generateDepartmentArray = (numOfEntries) => {
   let departmentArray = [];
-  for (let i = 0; i < numOfEntries; i++) {
+  for (let i = 0; i < numOfEntries; i += 1) {
     let arr = [
       generateRandomID(),
       generateDepartment(),
@@ -144,12 +135,12 @@ const generateDepartmentArray = (numOfEntries) => {
 
 const generateProjectArray = (numOfEntries) => {
   let projectArray = [];
-  for (let i = 0; i < numOfEntries; i++) {
+  for (let i = 0; i < numOfEntries; i += 1) {
     let arr = [
       generateRandomID(),
       generateProject(),
-      generateRandomDate(),
-      generateRandomDate()
+      DateGenerator.getRandomDateInRange(startDate, endDate),
+      DateGenerator.getRandomDateInRange(startDate, endDate)
     ];
     projectArray.push(arr);
   }
