@@ -1,72 +1,74 @@
+'use strict';
+
 const firstName = [
-  "Judith",
-  "Aphrodite",
-  "Meghan",
-  "Deanna",
-  "Uriel",
-  "Orson",
-  "Keegan",
-  "Cadman",
-  "Anne",
-  "Ingrid",
-  "Kenneth",
-  "Nadine",
-  "Casey",
-  "Ramona",
-  "Malachi",
-  "Jane",
-  "Phoebe",
-  "Kellie",
-  "Emi",
-  "Aquila"
+  'Judith',
+  'Aphrodite',
+  'Meghan',
+  'Deanna',
+  'Uriel',
+  'Orson',
+  'Keegan',
+  'Cadman',
+  'Anne',
+  'Ingrid',
+  'Kenneth',
+  'Nadine',
+  'Casey',
+  'Ramona',
+  'Malachi',
+  'Jane',
+  'Phoebe',
+  'Kellie',
+  'Emi',
+  'Aquila'
 ];
 
 const lastName = [
-  "Lambert",
-  "Lindsay",
-  "Banks",
-  "Brady",
-  "Peterson",
-  "Chan",
-  "Crane",
-  "Bradford",
-  "Vazquez",
-  "Bean",
-  "Ayala",
-  "Bates",
-  "Reese",
-  "Francis",
-  "Kennedy",
-  "Rosario",
-  "Colon",
-  "Oneal",
-  "Rios",
-  "Baker"
+  'Lambert',
+  'Lindsay',
+  'Banks',
+  'Brady',
+  'Peterson',
+  'Chan',
+  'Crane',
+  'Bradford',
+  'Vazquez',
+  'Bean',
+  'Ayala',
+  'Bates',
+  'Reese',
+  'Francis',
+  'Kennedy',
+  'Rosario',
+  'Colon',
+  'Oneal',
+  'Rios',
+  'Baker'
 ];
 
 const departments = [
-  "Payroll",
-  "Media Relations",
-  "Public Relations",
-  "Accounting",
-  "Quality Assurance",
-  "Human Resources",
-  "Research and Development",
-  "Customer Relations",
-  "Sales and Marketing",
-  "Finances",
-  "Tech Support"
+  'Payroll',
+  'Media Relations',
+  'Public Relations',
+  'Accounting',
+  'Quality Assurance',
+  'Human Resources',
+  'Research and Development',
+  'Customer Relations',
+  'Sales and Marketing',
+  'Finances',
+  'Tech Support'
 ];
 
 const projects = [
-  "Square Tuba",
-  "Bleeding Indigo Omega",
-  "Locomotive Rainbow",
-  "Burst Straw",
-  "Grim Northernmost Balcony",
-  "Early Scorpion",
-  "Drill Rebel",
-  "Drill Olive"
+  'Square Tuba',
+  'Bleeding Indigo Omega',
+  'Locomotive Rainbow',
+  'Burst Straw',
+  'Grim Northernmost Balcony',
+  'Early Scorpion',
+  'Drill Rebel',
+  'Drill Olive'
 ];
 
 const generateRandomNumber = (arr) => {
@@ -75,12 +77,12 @@ const generateRandomNumber = (arr) => {
 
 const generateRandomID = () => {
   return Math.floor(Math.random() * 100001);
-}
+};
 
 const generateName = () => {
   const lastNameIndex = generateRandomNumber(lastName);
   const firstNameIndex = generateRandomNumber(firstName);
-  return firstName[firstNameIndex] + " " + lastName[lastNameIndex];
+  return firstName[firstNameIndex] + ' ' + lastName[lastNameIndex];
 };
 
 const generateDepartment = () => {
@@ -99,19 +101,18 @@ const generateRandomSalary = () => {
   return Math.floor(Math.random() * maxSalary) + minSalary;
 };
 
-const generateRandomDate = (date1 = "01/01/2018", date2 = "01/01/2020") => {
+const generateRandomDate = (date1 = '01/01/2018', date2 = '01/01/2020') => {
   function randomValueBetween(min, max) {
     return Math.random() * (max - min) + min;
   }
-  var date1 = date1 || "01-01-1970";
+  var date1 = date1 || '01-01-1970';
   var date2 = date2 || new Date().toLocaleDateString();
   date1 = new Date(date1).getTime();
   date2 = new Date(date2).getTime();
   if (date1 > date2) {
     return new Date(randomValueBetween(date2, date1)).toLocaleDateString();
-  } else {
-    return new Date(randomValueBetween(date1, date2)).toLocaleDateString();
   }
+  return new Date(randomValueBetween(date1, date2)).toLocaleDateString();
 };
 
 const generateEmployeeArray = (numOfEntries) => {
@@ -122,7 +123,7 @@ const generateEmployeeArray = (numOfEntries) => {
       generateName(),
       generateRandomSalary(),
       generateName()
-  ];
+    ];
     employeeArray.push(arr);
   }
   return employeeArray;
