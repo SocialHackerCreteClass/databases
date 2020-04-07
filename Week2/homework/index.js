@@ -162,9 +162,11 @@ const generateRandomNumber = (number) => {
 // NEEDS FIXING
 
 for (let i = 0; i <= employees.length; i += 1) {
-  db.query(
-    `UPDATE employee SET department_no=${generateRandomNumber(departments.length) + 1} WHERE employee_no=${i};`
-  );
+  db.query(`UPDATE employee
+    SET department_no=${generateRandomNumber(departments.length) + 1}
+    WHERE employee_no=${i};`, (err, result) => {
+    if (err) throw err;
+  });
 }
 
 /* =======================================================================
@@ -180,8 +182,7 @@ db.query(`SELECT
     managers.full_name AS Manager
     FROM employee
     LEFT JOIN employee AS managers
-    ON employee.manager = managers.employee_no;
-  `, (err, result) => {
+    ON employee.manager = managers.employee_no;`, (err, result) => {
   if (err) throw err;
   console.table(result);
 });
@@ -193,8 +194,7 @@ db.query(`SELECT employee.full_name AS employee,
   department.title AS department
   FROM employee
   RIGHT JOIN department
-  ON employee.department_no = department.department_no;
-  `, (err, result) => {
+  ON employee.department_no = department.department_no;`, (err, result) => {
   if (err) throw err;
   console.table(result);
 });
