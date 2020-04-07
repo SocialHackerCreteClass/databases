@@ -78,40 +78,21 @@ employees.forEach((employee) => {
 // A FOREIGN KEY referencing the same table is typically for a hierarchy structure
 // and it would use another column to reference the primary key.
 // ** All managers are also employees **
-// so the manager (ManagerID) is actually the employee_no (EmployeeID) of the manager
+// so the manager (manager) is actually the employee_no (EmployeeID) of the manager
 
 db.query(`ALTER TABLE employee
-  ADD managerID INT
+  ADD manager INT
   REFERENCES employee (employee_no);`, (err, result) => {
   if (err) throw err;
   console.log(result);
 });
 
-// Let's assume that the company has 2 managers and create a table for these too
-db.query(`CREATE TABLE ${databaseName}.managers (
-  managerID INT NOT NULL AUTO_INCREMENT,
-  full_name VARCHAR(100) NULL,
-  PRIMARY KEY (managerID)
-);`, (err, result) => {
-  if (err) throw err;
-  console.log('Table created..');
-});
-
-// Insert row data for the managers
-db.query(`INSERT INTO ${databaseName}.managers
-  (full_name)
-  VALUES
-  ('Judith Lambert'),
-  ('Aphrodite Lindsay');`, (err, result) => {
-  if (err) throw err;
-  console.log('Number of records inserted: ' + result.affectedRows);
-});
-
+// Let's assume that the company has 2 managers
 // These 2 managers need to be assgigned as managers of the rest of employees.
 // Themselves do not have managers. (NULL)
 for (let i = managers.length + 1; i < employees.length; i += 1) {
   db.query(
-    `UPDATE employee SET managerID=1 WHERE employee_no=${i};`, (err, result) => {
+    `UPDATE employee SET manager=1 WHERE employee_no=${i};`, (err, result) => {
       if (err) throw err;
       console.log(result);
     }
@@ -120,7 +101,7 @@ for (let i = managers.length + 1; i < employees.length; i += 1) {
 
 for (let i = employees.length; i >= employees.length / 2; i -= 1) {
   db.query(
-    `UPDATE employee SET managerID=2 WHERE employee_no=${i};`, (err, result) => {
+    `UPDATE employee SET manager=2 WHERE employee_no=${i};`, (err, result) => {
       if (err) throw err;
       console.log(result);
     }
@@ -199,7 +180,7 @@ db.query(`SELECT
     managers.full_name AS Manager
     FROM employee
     LEFT JOIN employee AS managers
-    ON employee.managerID = managers.employee_no;
+    ON employee.manager = managers.employee_no;
   `, (err, result) => {
   if (err) throw err;
   console.table(result);
