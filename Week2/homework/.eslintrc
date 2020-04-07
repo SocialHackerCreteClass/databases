@@ -1,0 +1,23 @@
+{
+  "extends": "airbnb-base/legacy",
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "env": {
+    "commonjs": true,
+    "node": true,
+    "browser": true,
+    "es6": true
+  },
+  "rules": {
+    "linebreak-style": "off",
+    "comma-dangle": ["error", "never"],
+    "no-unused-vars": [
+      "error",
+      {
+        "vars": "local",
+        "args": "none"
+      }
+    ]
+  }
+}
