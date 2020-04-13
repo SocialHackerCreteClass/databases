@@ -17,7 +17,7 @@ const currentConnection = (database_name) => {
         connectionLimit: 1,    // Ensures just one connection at a time
         host : "localhost",
         user : "root",
-        password : "Manstein1942!!",
+        password : "password",
         database : database_name
     });
 
